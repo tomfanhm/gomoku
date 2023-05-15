@@ -82,3 +82,14 @@ export function fiveConsecutive(
 
   return false;
 }
+
+export const checkDraw = (playfield: GomokuSchema): boolean => {
+  for (let i = 0; i < playfield.length; i++) {
+    for (let j = 0; j < playfield[i].length; j++) {
+      if (playfield[i][j] === "") {
+        return false;
+      }
+    }
+  }
+  return true;
+};

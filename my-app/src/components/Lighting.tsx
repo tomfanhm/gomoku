@@ -13,7 +13,7 @@ const Lighting: React.FC = () => {
       {positions.map((pos, i) => (
         <spotLight
           key={i}
-          intensity={0.5}
+          intensity={1}
           angle={0.7}
           penumbra={0.5}
           position={pos}

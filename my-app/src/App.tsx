@@ -13,11 +13,11 @@ function App() {
           gl={{
             alpha: true,
             antialias: true,
-            preserveDrawingBuffer: true,
           }}
         >
-          <PerspectiveCamera position={[0, 50, 50]} fov={75} makeDefault />
-          <OrbitControls makeDefault />
+          <color args={[0, 0, 0]} attach="background" />
+          <PerspectiveCamera position={[0, 15, 10]} fov={75} makeDefault />
+          <OrbitControls makeDefault maxPolarAngle={1.5} />
           <ambientLight intensity={0.5} />
           <gridHelper args={[14, 14]} />
           <Gomoku />

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   GomokuSchema,
+  checkDraw,
   fiveConsecutive,
   generatePlayfield,
   generatePositions,
@@ -14,6 +15,7 @@ const positions = generatePositions();
 
 const Gomoku: React.FC = () => {
   const [gameOver, setGameOver] = useState<boolean>(false);
+  const [draw, setDraw] = useState<boolean>(false);
   const [turn, setTurn] = useState<"black" | "white">("black");
   const [reset, setReset] = useState<boolean>(false);
   const [playfield, setPlayfield] = useState<GomokuSchema>(generatePlayfield());
@@ -21,16 +23,19 @@ const Gomoku: React.FC = () => {
 
   const handleMove = (index: number): boolean => {
     if (gameOver) return false;
+    if (draw) return false;
     const row = Math.floor(index / 15);
     const col = index % 15;
     const value = playfield[row][col];
-    if (value !== "") return false;
+    if (value !== "") return false; //selected
     const clone = [...playfield];
     clone[row][col] = turn;
     setPlayfield(clone);
     setTurn((prev) => (prev === "black" ? "white" : "black"));
-    const hasFiveConsecutive = fiveConsecutive(clone, row, col);
+    const hasFiveConsecutive = fiveConsecutive(clone, row, col); //check game win
     if (hasFiveConsecutive) setGameOver(true);
+    const gameDraw = checkDraw(playfield); //check game draw
+    if (gameDraw) setDraw(true);
     return true;
   };
 
@@ -63,9 +68,16 @@ const Gomoku: React.FC = () => {
       <Html fullscreen>
         {loading && <div className="spinner"></div>}
         {gameOver && (
-          <div className="game-over-container">
+          <div className="text-container">
             <h1>Game Over</h1>
             <p className="japanese-text">ゲームオーバー</p>
+            <button onClick={handleReset}>Play again</button>
+          </div>
+        )}
+        {draw && (
+          <div className="text-container">
+            <h1>Draw</h1>
+            <p className="japanese-text">引き分け</p>
             <button onClick={handleReset}>Play again</button>
           </div>
         )}
