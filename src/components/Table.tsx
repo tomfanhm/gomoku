@@ -1,5 +1,5 @@
-import { useTexture } from "@react-three/drei";
 import React from "react";
+import { useTexture } from "@react-three/drei";
 
 const Table: React.FC = () => {
   const texture = useTexture("./plywood_rough_1k.jpg");

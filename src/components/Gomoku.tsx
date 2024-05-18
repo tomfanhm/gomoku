@@ -1,15 +1,16 @@
 import React, { useState } from "react";
+import { Html } from "@react-three/drei";
+
 import {
-  GomokuSchema,
   checkDraw,
   fiveConsecutive,
   generatePlayfield,
   generatePositions,
+  GomokuSchema,
 } from "../functions/functions";
 import Button from "./Button";
-import Stones from "./Stones";
-import { Html } from "@react-three/drei";
 import Prompt from "./Prompt";
+import Stones from "./Stones";
 
 const positions = generatePositions();
 
@@ -27,14 +28,14 @@ const Gomoku: React.FC = () => {
     const row = Math.floor(index / 15);
     const col = index % 15;
     const value = playfield[row][col];
-    if (value !== "") return false; //selected
+    if (value !== "") return false; // Selected
     const clone = [...playfield];
     clone[row][col] = turn;
     setPlayfield(clone);
     setTurn((prev) => (prev === "black" ? "white" : "black"));
-    const hasFiveConsecutive = fiveConsecutive(clone, row, col); //check game win
+    const hasFiveConsecutive = fiveConsecutive(clone, row, col); // Check game win
     if (hasFiveConsecutive) setGameOver(true);
-    const gameDraw = checkDraw(playfield); //check game draw
+    const gameDraw = checkDraw(playfield); // Check game draw
     if (gameDraw) setDraw(true);
     return true;
   };

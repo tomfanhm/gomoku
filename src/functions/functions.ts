@@ -1,5 +1,5 @@
-import { z } from "zod";
 import * as THREE from "three";
+import { z } from "zod";
 
 export const GomokuSchema = z
   .union([z.literal("black"), z.literal("white"), z.literal("")])

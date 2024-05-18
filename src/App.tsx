@@ -1,5 +1,6 @@
 import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+
 import Gomoku from "./components/Gomoku";
 import Lighting from "./components/Lighting";
 import Table from "./components/Table";

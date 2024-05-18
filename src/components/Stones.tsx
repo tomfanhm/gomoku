@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
-import { GomokuSchema, generatePositions } from "../functions/functions";
 import * as THREE from "three";
+
+import { generatePositions, GomokuSchema } from "../functions/functions";
 
 type StonesProps = {
   playfield: GomokuSchema;
